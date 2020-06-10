@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Marked in the browser</title>
+</head>
+<link href="highlight.css" rel="stylesheet">
+<body>
+  <div id="content">
+    ```js
+    int name;
+    ```
+  </div>
+  <script src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
+  <script src="http://cdn.staticfile.org/highlight.js/10.0.3/highlight.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> -->
+  <script src="mm.js"></script>
+  <script>
+  
+  hljs.initHighlightingOnLoad();
+  var func = marked.setOptions({
+          
+          highlight: function(code) {
+            return hljs.highlightAuto(code).value;
+          },
+          pedantic: false,
+          gfm: true,
+          tables: true,
+          breaks: false,
+          sanitize: false,
+          smartLists: true,
+          smartypants: false,
+          xhtml: false
+        }
+      );
+    console.log(func);
+   
+    var htmlData = document.getElementById('content').innerHTML.trim();
+    document.getElementById('content').innerHTML = func(htmlData);
+    // document.getElementById('content').innerHTML = marked(htmlData,opt,function(cc,out){
+    //   console.log(out);
+    //   return hljs.highlightAuto(out).value;
+    // });
+  </script>
+</body>
+</html>
